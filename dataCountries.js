@@ -1,9 +1,8 @@
 let dataCountries = [];
 
  const countryList = document.querySelector("#dataCountries");
- const searchButtonI = document.getElementById('searchButton');
  const searchCountryI = document.getElementById("searchCountry");
-const searchRegionI =  document.getElementById("searchRegion");
+ const searchRegionI =  document.getElementById("searchRegion");
 
 // get data from a Json file
 async function fetchCountries() {
@@ -30,13 +29,11 @@ async function fetchCountries() {
 function displayCountries(countries){
 countryList.innerHTML = "";
 countries.forEach((country) => {
-            
-
+    
             // create li - country
             let listItem = document.createElement("li");
             listItem.classList.add("countryHTML");
-           
-
+ 
             // image data
             const flag = document.createElement("img");
             flag.src = country.flags.png;
@@ -70,21 +67,28 @@ countries.forEach((country) => {
 
 fetchCountries();
 
-console.log("button:", searchRegionI);
 
-// filter countries and  region
-
-searchButtonI.addEventListener("click", function () {
-    const region = searchRegionI.value;
-
-    console.log("Region seleccionada:", region);
-
+function filterCountriesRegion(){
+   
+    const countryInput = searchCountryI.value.toLowerCase().trim(); 
+    const regionSelect = searchRegionI.value;
+   
     const filterCountries = dataCountries.filter(function (country) {
-        return country.region === region || region === "";
+
+        const countryName = country.name.toLowerCase().includes(countryInput);
+        const regionName = country.region === regionSelect || regionSelect === "";
+
+        return countryName && regionName;
     });
 
-    console.log("Países filtrados:", filterCountries);
+     displayCountries(filterCountries);
+}
 
-    displayCountries(filterCountries);
-});
+// filter while typing
+searchCountryI.addEventListener("input", filterCountriesRegion);
+
+// filter when select a region
+searchRegionI.addEventListener("change", filterCountriesRegion);
+
+
 
