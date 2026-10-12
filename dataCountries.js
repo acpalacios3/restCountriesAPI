@@ -33,6 +33,13 @@ countries.forEach((country) => {
             // create li - country
             let listItem = document.createElement("li");
             listItem.classList.add("countryHTML");
+
+            // navigate to another page and proceed to send the name of the selected country
+            listItem.addEventListener("click", function () {
+                window.location.href =
+                    `countryInfo.html?country=${encodeURIComponent(country.name)}`;
+            });
+
  
             // image data
             const flag = document.createElement("img");
