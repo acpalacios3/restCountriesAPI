@@ -10,11 +10,25 @@
 
 <body>
   <h1>REST Countries</h1>
-  <form id="searchForm" novalidate>
+  <form id="searchForm" >
 
-    <div class="form-group d-flex align-items-center mb-1">
-      <label for="postTitle" class="form-label">Search Country</label>
-      <input id="searchRegion" type="text" class="form-control w-50" placeholder="Enter country" required>
+  
+      <label for="searchCountry" class="form-label">Search Country</label>
+      <input 
+            id="searchCountry" 
+            type="text"  
+            placeholder="Enter country" required
+      >
+
+    <label for="searchRegion">Filter by Region</label>
+    <select id="searchRegion">
+        <option value="">All regions</option>
+        <option value="Africa">Africa</option>
+        <option value="Americas">Americas</option>
+        <option value="Asia">Asia</option>
+        <option value="Europe">Europe</option>
+        <option value="Oceania">Oceania</option>
+    </select>  
 
     </div>
   
@@ -29,7 +43,7 @@
 
   </div>
 
-  <script type="module" src="./dist/dataCountries.js"></script>
+  <script src="./dataCountries.js" defer></script>
 </body>
 
 </html>
