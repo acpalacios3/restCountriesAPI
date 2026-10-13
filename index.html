@@ -4,41 +4,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- - Family: [Nunito Sans](https://fonts.google.com/specimen/Nunito+Sans) -->
+  <!-- - Weights: 300, 600, 800 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+    rel="stylesheet">
+
   <title>REST Countries</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
-  <h1>REST Countries</h1>
-  <form id="searchForm" >
 
-  
-      <label for="searchCountry" class="form-label">Search Country</label>
-      <input 
-            id="searchCountry" 
-            type="text"  
-            placeholder="Enter country" required
-      >
+  <header>
+    <h1>Where in the World</h1>
 
-    <label for="searchRegion">Filter by Region</label>
-    <select id="searchRegion">
-        <option value="">All regions</option>
-        <option value="Africa">Africa</option>
-        <option value="Americas">Americas</option>
-        <option value="Asia">Asia</option>
-        <option value="Europe">Europe</option>
-        <option value="Oceania">Oceania</option>
-    </select>  
+  </header>
 
-    </div>
-  
+  <main>
+
+    <form id="searchForm" class=" searchForm">
+
+      <div class="countryContainer">
+      
+        <input id="searchCountry" type="text" placeholder="Search for a country" aria-label="Search for a country">
+      </div>
+
+      <div class="regionContainer">
+       
+
+        <select id="searchRegion" aria-label="Filter by Region">
+          <option value="">Filter by Region</option>
+          <option value="Africa">Africa</option>
+          <option value="Americas">Americas</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="Oceania">Oceania</option>
+        </select>
+
+      </div>
+
     </form>
 
-  <div>
-    <ul id="dataCountries"></ul>
+    <section>
 
-  </div>
+      <ul id="dataCountries"></ul>
 
+    </section>
+
+  </main>
   <script src="./dataCountries.js" defer></script>
 </body>
 

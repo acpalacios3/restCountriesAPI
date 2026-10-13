@@ -24,7 +24,25 @@ async function fetchCountries() {
     };
 }
 
+// function to create elements with bold label
+function createCountryField(labelText, valueText) {
+    const field = document.createElement("p");
 
+    //create bold element 
+    const label = document.createElement("strong");
+
+    // create label element  in HTML
+    label.classList.add("country-label");
+    label.textContent = `${labelText}: `;
+
+    const valueSpan = document.createElement("span");
+    valueSpan.textContent = valueText;
+
+    field.appendChild(label);
+    field.appendChild(valueSpan);
+
+    return field;
+}
 
 function displayCountries(countries){
 countryList.innerHTML = "";
@@ -47,17 +65,37 @@ countries.forEach((country) => {
             flag.alt = `${country.name} flag`;
 
             // data countries
+
             const nameCountry = document.createElement("h2");
             nameCountry.textContent = country.name;
 
-            const population = document.createElement("p");
-            population.textContent = `Population: ${country.population.toLocaleString()}`;
 
-            let capital = document.createElement("h2");
-            capital.textContent = `Capital:  ${country.capital}`;
+            // const population = document.createElement("p");
+            // population.textContent = `Population: ${country.population.toLocaleString()}`;
 
-             let region = document.createElement("p");
-            region.textContent = `Region:  ${country.region}`;
+            // create bold element
+          
+            const population = createCountryField(
+                "Population",
+                country.population.toLocaleString()
+            );
+
+            
+            // let capital = document.createElement("p");
+            // capital.textContent = `Capital:  ${country.capital}`;
+
+               const capital = createCountryField(
+                "Capital",
+                country.capital
+            );
+
+            //  let region = document.createElement("p");
+            // region.textContent = `Region:  ${country.region}`;
+
+             const region = createCountryField(
+                "Region",
+                country.region
+            );
 
             // add the elements to li in HTML
            listItem.appendChild(flag);
