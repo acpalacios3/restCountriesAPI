@@ -26,14 +26,14 @@ async function fetchCountryInfo() {
         }
 
         // Get currencies
-    //     "currencies": [
-    //   {
-    //     "code": "EUR",
-    //     "name": "Euro",
-    //     "symbol": "€"
-    //   }
-    // ],
-    
+        //     "currencies": [
+        //   {
+        //     "code": "EUR",
+        //     "name": "Euro",
+        //     "symbol": "€"
+        //   }
+        // ],
+
         const currencies = country.currencies
             ? country.currencies.map(function (currency) {
                 return currency.name;
@@ -41,14 +41,14 @@ async function fetchCountryInfo() {
             : "N/A";
 
 
-    //    "languages": [
-    //   {
-    //     "iso639_1": "fr",
-    //     "iso639_2": "fra",
-    //     "name": "French",
-    //     "nativeName": "français"
-    //   }
-    // ],     
+        //    "languages": [
+        //   {
+        //     "iso639_1": "fr",
+        //     "iso639_2": "fra",
+        //     "name": "French",
+        //     "nativeName": "français"
+        //   }
+        // ],     
 
         // Get languages
         const languages = country.languages
@@ -56,25 +56,42 @@ async function fetchCountryInfo() {
                 return language.name;
             }).join(", ")
             : "N/A";
-      
+
 
         // Display country details
         countryInfo.innerHTML = `
+        <div class="country-flag-container">   
             <img
+                class="country-flag"
                 src="${country.flags.png}"
                 alt="${country.name} flag"
                 width="300"
             >
-            <h1>${country.name}</h1>
-            <p>Native Name: ${country.nativeName || "N/A"}</p>
-            <p>Population: ${country.population.toLocaleString()}</p>
-            <p>Region: ${country.region || "N/A"}</p>
-            <p>Sub Region: ${country.subregion || "N/A"}</p>
-            <p>Capital: ${country.capital || "N/A"}</p>
-            <p>Top Level Domain: ${(country.topLevelDomain || []).join(", ") || "N/A"}</p>
-            <p>Currencies: ${currencies}</p>
-            <p>Languages: ${languages}</p>
+        </div>    
+
+        <div class="country-details-content">
+            <h2>${country.name}</h2>
+
+            <p><strong>Native Name:</strong> ${country.nativeName || "N/A"}</p>
+            <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
+            <p><strong>Region:</strong> ${country.region || "N/A"}</p>
+            <p><strong>Sub Region:</strong> ${country.subregion || "N/A"}</p>
+            <p><strong>Capital:</strong> ${country.capital || "N/A"}</p>
+            <p><strong>Top Level Domain:</strong> ${(country.topLevelDomain || []).join(", ") || "N/A"}</p>
+            <p><strong>Currencies:</strong> ${currencies}</p>
+            <p><strong>Languages:</strong> ${languages}</p>
+        </div>       
         `;
+
+
+
+        /// Move Border Countries below the country details
+        const borderSection = document.getElementById("borderSection");
+        const detailsContent = countryInfo.querySelector(".country-details-content");
+
+        if (borderSection && detailsContent) {
+            detailsContent.appendChild(borderSection);
+        }
 
         // border countries
         //   example: France
@@ -108,8 +125,8 @@ async function fetchCountryInfo() {
         } else {
             borderCountriesHTML.textContent = "No border countries";
         }
-            
-                
+
+
 
     } catch (error) {
         console.error("Error loading country:", error);

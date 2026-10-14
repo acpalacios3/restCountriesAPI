@@ -15,6 +15,8 @@
 
   <title>REST Countries</title>
   <link rel="stylesheet" href="./styles.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -26,15 +28,17 @@
 
   <main>
 
-    <form id="searchForm" class=" searchForm">
+    <form id="searchForm" class="searchForm">
 
       <div class="countryContainer">
-      
+        <!-- label to display icon  and class="bi" use Bootstrap icons-->
+        <i class="bi bi-search search-icon"></i>
+
         <input id="searchCountry" type="text" placeholder="Search for a country" aria-label="Search for a country">
       </div>
 
       <div class="regionContainer">
-       
+
 
         <select id="searchRegion" aria-label="Filter by Region">
           <option value="">Filter by Region</option>

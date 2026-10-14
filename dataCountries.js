@@ -1,8 +1,8 @@
 let dataCountries = [];
 
- const countryList = document.querySelector("#dataCountries");
- const searchCountryI = document.getElementById("searchCountry");
- const searchRegionI =  document.getElementById("searchRegion");
+const countryList = document.querySelector("#dataCountries");
+const searchCountryI = document.getElementById("searchCountry");
+const searchRegionI = document.getElementById("searchRegion");
 
 // get data from a Json file
 async function fetchCountries() {
@@ -15,7 +15,7 @@ async function fetchCountries() {
 
         dataCountries = await response.json();
         console.log("Data Countries:", dataCountries);
-     
+
         // display countries
         displayCountries(dataCountries);
     } catch (error) {
@@ -44,80 +44,79 @@ function createCountryField(labelText, valueText) {
     return field;
 }
 
-function displayCountries(countries){
-countryList.innerHTML = "";
-countries.forEach((country) => {
-    
-            // create li - country
-            let listItem = document.createElement("li");
-            listItem.classList.add("countryHTML");
+function displayCountries(countries) {
+    countryList.innerHTML = "";
+    countries.forEach((country) => {
 
-            // navigate to another page and proceed to send the name of the selected country
-            listItem.addEventListener("click", function () {
-                window.location.href =
-                    `countryInfo.html?country=${encodeURIComponent(country.name)}`;
-            });
+        // create li - country
+        let listItem = document.createElement("li");
+        listItem.classList.add("countryHTML-card");
 
- 
-            // image data
-            const flag = document.createElement("img");
-            flag.src = country.flags.png;
-            flag.alt = `${country.name} flag`;
-
-            // data countries
-
-            const nameCountry = document.createElement("h2");
-            nameCountry.textContent = country.name;
-
-
-            // const population = document.createElement("p");
-            // population.textContent = `Population: ${country.population.toLocaleString()}`;
-
-            // create bold element
-          
-            const population = createCountryField(
-                "Population",
-                country.population.toLocaleString()
-            );
-
-            
-            // let capital = document.createElement("p");
-            // capital.textContent = `Capital:  ${country.capital}`;
-
-               const capital = createCountryField(
-                "Capital",
-                country.capital
-            );
-
-            //  let region = document.createElement("p");
-            // region.textContent = `Region:  ${country.region}`;
-
-             const region = createCountryField(
-                "Region",
-                country.region
-            );
-
-            // add the elements to li in HTML
-           listItem.appendChild(flag);
-           listItem.appendChild(nameCountry);
-           listItem.appendChild(population);
-           listItem.appendChild(region);
-           listItem.appendChild(capital);
-
-            // Make listItem a child of countryList
-           countryList.appendChild(listItem);
-     
+        // navigate to another page and proceed to send the name of the selected country
+        listItem.addEventListener("click", function () {
+            window.location.href =
+                `countryInfo.html?country=${encodeURIComponent(country.name)}`;
         });
+
+
+        // image data
+        const flag = document.createElement("img");
+        flag.src = country.flags.png;
+        flag.alt = `${country.name} flag`;
+
+        // data countries
+
+        const nameCountry = document.createElement("h2");
+        nameCountry.textContent = country.name;
+
+        // create bold element
+
+        const population = createCountryField(
+            "Population",
+            country.population.toLocaleString()
+        );
+
+
+        const capital = createCountryField(
+            "Capital",
+            country.capital
+        );
+
+      
+        const region = createCountryField(
+            "Region",
+            country.region
+        );
+
+        // create container for country information
+        const countryInfo = document.createElement("div");
+        countryInfo.classList.add("country-info");
+
+        // add the elements inside countryInfo
+        countryInfo.appendChild(nameCountry);
+        countryInfo.appendChild(population);
+        countryInfo.appendChild(region);
+        countryInfo.appendChild(capital);
+
+        // add the flag andinformation to the country card
+        listItem.appendChild(flag);
+        listItem.appendChild(countryInfo);
+
+
+        //add the country card to the country list    
+        countryList.appendChild(listItem);
+
+    });
 }
 
 fetchCountries();
 
 
-function filterCountriesRegion(){
-   
-    const countryInput = searchCountryI.value.toLowerCase().trim(); 
+function filterCountriesRegion() {
+
+    const countryInput = searchCountryI.value.toLowerCase().trim();
     const regionSelect = searchRegionI.value;
-   
+
     const filterCountries = dataCountries.filter(function (country) {
 
         const countryName = country.name.toLowerCase().includes(countryInput);
@@ -126,7 +125,7 @@ function filterCountriesRegion(){
         return countryName && regionName;
     });
 
-     displayCountries(filterCountries);
+    displayCountries(filterCountries);
 }
 
 // filter while typing
