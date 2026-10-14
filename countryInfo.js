@@ -35,14 +35,7 @@ async function fetchCountryInfo() {
             : "N/A";
 
 
-        //    "languages": [
-        //   {
-        //     "iso639_1": "fr",
-        //     "iso639_2": "fra",
-        //     "name": "French",
-        //     "nativeName": "français"
-        //   }
-        // ],     
+        //    "languages": [{"iso639_1": "fr","iso639_2": "fra", "name": "French", "nativeName": "français"}],     
 
         // Get languages
         const languages = country.languages
@@ -138,6 +131,22 @@ async function fetchCountryInfo() {
 }
 
 fetchCountryInfo();
+
+// Toggle the color scheme between light and dark mode
+const toggleColorB = document.getElementById("toggleColor");
+
+toggleColorB.addEventListener("click", ()=>{
+
+    document.body.classList.toggle("dark-mode");
+   if (document.body.classList.contains("dark-mode")){
+
+     toggleColorB.textContent = "Light Mode";            
+   } else {
+     toggleColorB.textContent = "Darl Mode"
+
+   }
+}
+);
 
 
 

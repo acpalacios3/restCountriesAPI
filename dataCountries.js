@@ -69,20 +69,16 @@ function displayCountries(countries) {
         const nameCountry = document.createElement("h2");
         nameCountry.textContent = country.name;
 
-        // create bold element
-
         const population = createCountryField(
             "Population",
             country.population.toLocaleString()
         );
-
 
         const capital = createCountryField(
             "Capital",
             country.capital
         );
 
-      
         const region = createCountryField(
             "Region",
             country.region
@@ -112,10 +108,16 @@ function displayCountries(countries) {
 fetchCountries();
 
 
-function filterCountriesRegion() {
+function filterCountriesRegion(event) {
+
+    if (event.target === searchRegionI) {
+
+        searchCountryI.value = "";
+    }
 
     const countryInput = searchCountryI.value.toLowerCase().trim();
     const regionSelect = searchRegionI.value;
+
 
     const filterCountries = dataCountries.filter(function (country) {
 
@@ -136,15 +138,16 @@ searchRegionI.addEventListener("change", filterCountriesRegion);
 
 // Toggle the color scheme between light and dark mode
 const toggleColorB = document.getElementById("toggleColor");
-toggleColorB.addEventListener("click", ()=>{
+
+toggleColorB.addEventListener("click", () => {
 
     document.body.classList.toggle("dark-mode");
-   if (document.body.classList.contains("dark-mode")){
+    if (document.body.classList.contains("dark-mode")) {
 
-     toggleColorB.textContent = "Light Mode";            
-   } else {
-     toggleColorB.textContent = "Darl Mode"
+        toggleColorB.textContent = "☾ Light Mode";
+    } else {
+        toggleColorB.textContent = "☽ Dark Mode"
 
-   }
+    }
 }
 );
