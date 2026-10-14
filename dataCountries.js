@@ -134,5 +134,17 @@ searchCountryI.addEventListener("input", filterCountriesRegion);
 // filter when select a region
 searchRegionI.addEventListener("change", filterCountriesRegion);
 
+// Toggle the color scheme between light and dark mode
+const toggleColorB = document.getElementById("toggleColor");
+toggleColorB.addEventListener("click", ()=>{
 
+    document.body.classList.toggle("dark-mode");
+   if (document.body.classList.contains("dark-mode")){
 
+     toggleColorB.textContent = "Light Mode";            
+   } else {
+     toggleColorB.textContent = "Darl Mode"
+
+   }
+}
+);

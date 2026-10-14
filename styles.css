@@ -1,9 +1,19 @@
+/* Light Mode */
 :root {
     --background-color: hsl(0, 0%, 99%);
     --element-color: hsl(0, 100%, 100%);
     --text-color: hsl(200, 15%, 8%);
     --input-color: hsl(0, 0%, 50%);
 }
+
+/* Dark Mode */
+body.dark-mode {
+  --background-color: hsl(207, 26%, 17%);
+  --element-color: hsl(209, 23%, 22%);
+  --text-color: hsl(0, 100%, 100%);
+  --input-color: hsl(0, 0%, 80%);
+}
+
 
 
 body {
@@ -73,6 +83,10 @@ header {
     background-color: var(--element-color);
     padding: 20px 5%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    
+    display: flex;
+    justify-content: space-between;
+    
 }
 
 header h1 {
@@ -167,6 +181,14 @@ main {
 }
 
 
+.toggleColor{
+   
+    margin-left: 0;
+      
+}
+
+
+
 /* *******************************
 styles for country info details
 ******************************* */
@@ -254,6 +276,7 @@ align-items: start;
     width: 100%;
     height: auto;
     object-fit: contain;
+    border: 1px solid #e0e0e0;
 }
 
 /* Border Countries */
