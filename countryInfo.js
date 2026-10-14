@@ -26,13 +26,7 @@ async function fetchCountryInfo() {
         }
 
         // Get currencies
-        //     "currencies": [
-        //   {
-        //     "code": "EUR",
-        //     "name": "Euro",
-        //     "symbol": "€"
-        //   }
-        // ],
+        //     "currencies": [{"code": "EUR","name": "Euro", "symbol": "€"}],
 
         const currencies = country.currencies
             ? country.currencies.map(function (currency) {
@@ -72,14 +66,23 @@ async function fetchCountryInfo() {
         <div class="country-details-content">
             <h2>${country.name}</h2>
 
-            <p><strong>Native Name:</strong> ${country.nativeName || "N/A"}</p>
-            <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
-            <p><strong>Region:</strong> ${country.region || "N/A"}</p>
-            <p><strong>Sub Region:</strong> ${country.subregion || "N/A"}</p>
-            <p><strong>Capital:</strong> ${country.capital || "N/A"}</p>
-            <p><strong>Top Level Domain:</strong> ${(country.topLevelDomain || []).join(", ") || "N/A"}</p>
-            <p><strong>Currencies:</strong> ${currencies}</p>
-            <p><strong>Languages:</strong> ${languages}</p>
+            <div class = "country-details-columns">
+
+               <div class = "country-details-info">
+                    <p><strong>Native Name:</strong> ${country.nativeName || "N/A"}</p>
+                    <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
+                    <p><strong>Region:</strong> ${country.region || "N/A"}</p>
+                    <p><strong>Sub Region:</strong> ${country.subregion || "N/A"}</p>
+                    <p><strong>Capital:</strong> ${country.capital || "N/A"}</p>
+                </div>
+
+                <div class = "country-details-add">
+                    <p><strong>Top Level Domain:</strong> ${(country.topLevelDomain || []).join(", ") || "N/A"}</p>
+                    <p><strong>Currencies:</strong> ${currencies}</p>
+                    <p><strong>Languages:</strong> ${languages}</p>
+                </div>
+
+            </div>
         </div>       
         `;
 

@@ -86,6 +86,7 @@ main {
     padding: 40px 5%;
 }
 
+ /* Desktop 1440px */
 #dataCountries {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -97,8 +98,7 @@ main {
     /*horizontal separation between cards*/
     padding: 0;
     margin: 0;
-    list-style: none;
-    /*remove points from lists*/
+    list-style: none;  /*remove points from lists*/
 
 }
 
@@ -145,7 +145,7 @@ main {
     padding-left: 50px;
 }
 
-/* Responsive layout for the countries page */
+/* Responsive layout for the countries page for mobile 375 */
 @media (max-width: 600px) {
     .searchForm {
         flex-direction: column;
@@ -157,6 +157,13 @@ main {
     .regionContainer {
         width: 100%;
     }
+  
+    /* Display countries in one column */
+    #dataCountries{
+        grid-template-columns: 1fr;
+        row-gap: 40px;
+    }
+
 }
 
 
@@ -189,6 +196,21 @@ styles for country info details
     /* align-items: flex-start; */
     gap: 100px;
     margin-top: 40px;
+}
+
+
+.country-details-columns{
+display: grid;
+grid-template-columns: 1fr 1fr;
+column-gap: 40px;
+margin-top: 20px;
+align-items: start;
+
+}
+
+
+.country-details-add{
+    margin-top: 0; /*remove the top margin of the paragraph so that it aligns with ountry-details-info*/
 }
 
 
@@ -248,5 +270,10 @@ styles for country info details
     border: 1px solid #eeeeee;
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+}
+
+strong{
+font-weight: bold;
 
 }
