@@ -1,4 +1,4 @@
-import { API_KEY } from "./keys.js";
+import { API_KEY } from "./secret.js";
 
 const API_URL = "https://api.restcountries.com/countries/v5";
 
