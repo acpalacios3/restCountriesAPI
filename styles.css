@@ -120,7 +120,7 @@ main {
 
 /* so that the flags look aligned */
 #dataCountries img {
-    width: 100%;
+     width: calc(100% - 2px);
     height: 250px;
     object-fit: cover;
     border-radius: 8px 8px 0 0;
@@ -204,6 +204,12 @@ styles for country info details
         flex-direction: column;
         gap: 30px;
     }
+
+    #countryInfo .country-details-columns {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
     .country-flag-container {
         width: 100%;
