@@ -1,23 +1,73 @@
+const API_KEY = "";
+const API_URL = "https://api.restcountries.com/countries/v5";
+
+
 let dataCountries = [];
 
 const countryList = document.querySelector("#dataCountries");
 const searchCountryI = document.getElementById("searchCountry");
 const searchRegionI = document.getElementById("searchRegion");
 
-// get data from a Json file
+// get data from REST Countries API 
 async function fetchCountries() {
     try {
-        const response = await fetch("./data.json");
+        const countries = [];
+        let offset = 0;
+        let more = true;
 
-        if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
+        while (more) {
+                const url =
+                    `${API_URL}?limit=100&offset=${offset}` +
+                    `&response_fields=names.common,codes.alpha_3,population,capitals,region,flag.url_png`;
+
+                const response = await fetch(url, {
+                    headers: {
+                        Authorization: `Bearer ${API_KEY}`
+                    }
+                });
+
+                if (!response.ok) {
+                const errorDetails = await response.text();
+                throw new Error(
+                    `HTTP error: ${response.status} - ${errorDetails}`
+                );
+            }
+
+                // const result = await response.json();
+
+                console.log("Status:", response.status);
+
+                const result = await response.json();
+                console.log("Respuesta:", result);
+                console.log("Data:", result.data);
+                console.log("Objects:", result.data?.objects);
+
+
+                countries.push(...result.data.objects);
+
+                more = result.data.meta.more;
+                offset += 100;
+                // offset += result.data.meta.limit;
         }
 
-        dataCountries = await response.json();
+        // Adapt API data to the structura similar File data.json
+        dataCountries = countries.map(country => ({
+            name: country.names.common,
+            cca3: country.codes.alpha_3,
+            flags: {
+                png: country.flag.url_png
+            },
+            population: country.population,
+            capital: country.capitals?.map(capital => capital.name) ?? [],
+            region: country.region
+        }));
+
+
         console.log("Data Countries:", dataCountries);
 
         // display countries
         displayCountries(dataCountries);
+
     } catch (error) {
         console.error("Unknown error:", error);
         throw error;
@@ -59,13 +109,21 @@ function displayCountries(countries) {
         });
 
 
-        // image data
+        // image flag
         const flag = document.createElement("img");
         flag.src = country.flags.png;
         flag.alt = `${country.name} flag`;
 
-        // data countries
+        // Show a message if the flag cannot be loaded for example Abkhazia
+        flag.onerror = function () {
+                flag.onerror = null;
+                flag.alt = "image not available";
+        };
 
+
+
+
+        // data countries
         const nameCountry = document.createElement("h2");
         nameCountry.textContent = country.name;
 
@@ -76,7 +134,7 @@ function displayCountries(countries) {
 
         const capital = createCountryField(
             "Capital",
-            country.capital
+            country.capital.join(", ") || "N/A"
         );
 
         const region = createCountryField(
@@ -107,7 +165,7 @@ function displayCountries(countries) {
 
 fetchCountries();
 
-
+// filter countries by name and region
 function filterCountriesRegion(event) {
 
     if (event.target === searchRegionI) {

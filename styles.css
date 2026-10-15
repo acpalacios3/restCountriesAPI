@@ -305,3 +305,9 @@ strong {
     font-weight: bold;
 
 }
+
+
+body.dark-mode #borderCountries button {
+    color: white;
+    border: none;
+}
